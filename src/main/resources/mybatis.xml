@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 
+	2.在mybatis.xml 中开启log4j
+		2.1 必须保证有log4j.jar
+		2.2 在src 下有log4j.properties 
+		2.3 mybatis.xml中加上以下代码
+	-->
+	<settings>
+		<setting name="logImpl" value="LOG4J" />
+	</settings>
+	
+<!-- 	
+	1.系统内置别名: 把类型全小写
+	2.给某个类起别名
+		2.1 alias=”自定义”
+		2.2 mapper.xml 中peo 引用People 类
+	3.直接给某个包下所有类起别名,别名为类名,不区分大小写
+		3.1 mybatis.xml 中配置
+		3.2 mapper.xml 中通过类名引用 -->
+	<typeAliases>
+		<typeAlias type="com.pojo.People" alias="peo"/>
+		<package name="com.pojo"/>
+	</typeAliases>
+	
+	<environments default="default">
+		<environment id="default">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/ssm" />
+				<property name="username" value="root" />
+				<property name="password" value="123456" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="com/mapper/PeopleMapper.xml" />
+	</mappers>
+
+</configuration>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="a.b">
+
+	<select id="c" resultType="com.pojo.People">
+		select * from people
+	</select>
+
+	<select id="selById" resultType="com.pojo.People" parameterType="int">
+	<!-- select * from people where id=#{0} -->
+	<!-- select * from people where id=#{param1} -->
+	select * from people where id=#{sdadsa} 
+	</select>
+	<select id="selById2" resultType="com.pojo.People" parameterType="int">
+	select * from people where id=${2}
+	</select>
+
+
+	<select id="selById3" resultType="com.pojo.People" parameterType="com.pojo.People">
+		select * from people where id=${id}
+	</select>
+	<select id="selById4" resultType="com.pojo.People" parameterType="com.pojo.People">
+		select * from people where id=#{id}
+	</select>
+
+
+	<select id="selById5" resultType="peo" parameterType="map">
+		select * from people where id=#{id} and name =#{name}
+	</select>
+
+
+	<!-- 分页查询 -->
+	<select id="page" resultType="People" parameterType="map">
+		select *
+		from people limit #{pageStart}, #{pageSize}
+	</select>
+<!-- 
+	1. 概念复习
+		1.1 功能:从应用程序角度出发,软件具有哪些功能.
+		1.2 业务:完成功能时的逻辑.对应Service 中一个方法
+		1.3 事务:从数据库角度出发,完成业务时需要执行的SQL 集合,统称一个事务.
+			1.3.1 事务回滚.如果在一个事务中某个SQL 执行事务,希望回归到事务的原点,保证数据库数据的完整性.
+	2. 在mybatis 中默认是关闭了JDBC 的自动提交功能
+		2.1 每一个SqlSession 默认都是不自动提交事务.
+		2.2 session.commit()提交事务.
+		2.3 openSession(true);自动提交.setAutoCommit(true);
+	3. mybatis 底层是对JDBC 的封装.
+		3.1 JDBC 中executeUpdate()执行新增,删除,修改的SQL.返回值int,表示受影响的行数.
+		3.2 mybatis 中<insert> <delete> <update>标签没有resultType 属性,认为返回值都是int
+	4. 在openSession() 时Mybatis 会创建SqlSession 时同时创建一个Transaction(事务对象),同时autoCommit 都为false
+		4.1 如果出现异常,应该session.rollback()回滚事务.
+	5. 实现新增的步骤
+		5.1 在mapper.xml 中提供<insert>标签,标签没有返回值类型
+		5.2 通过session.insert()调用新增方法 -->
+
+	<insert id="insert" parameterType="People">
+		insert into People values(default,#{name},#{age})
+		<!--values(default,${name},${age}) --><!-- 会报错 -->
+	</insert>
+	
+	<update id="update" parameterType="People">
+		update people set age = age +1 where  name =#{name}	
+	</update>
+
+</mapper>
