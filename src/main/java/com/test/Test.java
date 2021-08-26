@@ -45,18 +45,18 @@ public class Test {
 //				3.1 #{} 获取参数的内容支持索引获取,param1 获取指定位置参数,并且SQL 使用?占位符
 //				3.2 ${} 字符串拼接不使用?,默认找${内容}内容的get/set 方法,如果写数字,就是一个数字
 			
-/*			logger.info("-------------------------------参数为int类型  ${2}是直接拼接字符串,   把2当参数值传进去");
+/*			logger.info("-----------------------------selById2--参数为int类型  ${2}是直接拼接字符串,   把2当参数值传进去");
 			People p = sqlSession.selectOne("a.b.selById2", 2);
 			System.out.println(p);*/
 
-/*			logger.info("--------------------参数为对象类型    #{id}");
+/*			logger.info("--------------------selById4参数为对象类型    #{id}");
 			People p5 = new People();
 			p5.setId(1);
 			p5.setName("张三");
 			People p6 = sqlSession.selectOne("a.b.selById4", p5);
 			System.out.println(p6);*/
 			
-/*			logger.info("--------------------参数为对象类型    ${id}");
+/*			logger.info("--------------------selById3参数为对象类型    ${id}");
 			People p3 = new People();
 			p3.setId(1);
 			p3.setName("张三");

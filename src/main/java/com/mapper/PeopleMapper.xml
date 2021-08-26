@@ -14,8 +14,9 @@
 	<!-- select * from people where id=#{param1} -->
 	select * from people where id=#{sdadsa} 
 	</select>
+	
 	<select id="selById2" resultType="com.pojo.People" parameterType="int">
-	select * from people where id=${2}
+	select * from people where id=${1}
 	</select>
 
 
